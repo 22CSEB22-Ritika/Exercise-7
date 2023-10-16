@@ -1,0 +1,84 @@
+//PROGRAM 1
+
+package invent;
+
+import java.util.Scanner;
+
+public class stringdemo
+{
+    public static void main(String[] args){
+    while(true){
+    Scanner obj=new Scanner(System.in);
+    System.out.println("Enter your name:");
+    String name=new String();
+    name=obj.nextLine();
+    System.out.println("Enter your address:");
+    String address=new String();
+    address=obj.nextLine();
+    String Id=new String();
+    String B[]= name.split(" ");
+    for(String temp:B){
+        char c=temp.charAt(0);
+        Id+=c;
+    }
+   
+    char A[]= address.toCharArray();
+    int n=0;
+    for(char t:A)
+    {
+        if(Character.isDigit(t))
+        {
+           Id+=t+"";
+           n++;
+        }
+        if(n>=4)
+        {
+            break;
+        }
+    }
+    System.out.println("Your Id is:"+Id);
+    System.out.println("Enter 1 for continue generating the ID;");
+    int x=obj.nextInt();
+    if(x==0)
+        break;
+   
+    }
+}
+
+
+
+//PROGRAM 2
+import java.util.Scanner;
+
+public class SimpleEncryption {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a message to encrypt: ");
+        String message = scanner.nextLine();
+
+        int shift = 3; // You can change the shift value as needed
+
+        String encryptedMessage = encrypt(message, shift);
+        System.out.println("Encrypted message: " + encryptedMessage);
+
+        String decryptedMessage = decrypt(encryptedMessage, shift);
+        System.out.println("Decrypted message: " + decryptedMessage);
+    }
+    public static String encrypt(String message, int shift) {
+        StringBuilder result = new StringBuilder();
+        for (char c : message.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                result.append((char) (base + (c - base + shift) % 26));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
+    }
+
+    public static String decrypt(String encryptedMessage, int shift) {
+        return encrypt(encryptedMessage, 26 - shift); // Decrypting is the same as encrypting with a backward shift.
+    }
+}
